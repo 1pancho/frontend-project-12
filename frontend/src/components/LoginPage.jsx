@@ -23,7 +23,6 @@ const LoginPage = () => {
             .required('Обязательное поле'),
           password: Yup.string()
             .required('Обзательное поле')
-            .min(18)
         })
     })
 
