@@ -6,7 +6,7 @@ import i18next from "i18next";
 import App from "./App";
 import resources from './locales/index.js';
 import { I18nextProvider } from 'react-i18next';
-
+import AuthProvider from "./contexts/AuthProvider.jsx";
 
 
 const Init = async () => {
@@ -21,7 +21,9 @@ const Init = async () => {
     
     return (
         <I18nextProvider i18n={i18n}>
-            <App />
+            <AuthProvider>
+             <App />
+            </AuthProvider>
         </I18nextProvider>
     )
 }
