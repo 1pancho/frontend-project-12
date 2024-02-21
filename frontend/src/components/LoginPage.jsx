@@ -9,10 +9,14 @@ import useAuth from "../hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 import hexlet from '../assets/hexlet.jpeg';
 import routes from '../routes.js';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from "../store/slices/authSlice.js";
 
 
 const LoginPage = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -30,10 +34,15 @@ const LoginPage = () => {
       setAuthFailed(false)
 
         try {
-        const res = await axios.post(routes.loginPath(), values)
-        console.log(res)
-        localStorage.setItem('userId', JSON.stringify(res.data));
-        auth.logIn();
+        const result = await axios.post(routes.loginPath(), values)
+        const user = JSON.stringify(result.data);
+        const token = 'userId';
+
+        dispatch(setCredentials({user, token}))  //сетаем данные result в store
+          
+        
+        // localStorage.setItem('userId', JSON.stringify(res.data));
+        // auth.logIn();
         const { from } =  location.state || { from: '/private' };
         navigate(from);
       } catch (error) {
