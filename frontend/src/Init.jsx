@@ -24,9 +24,9 @@ const Init = async () => {
     return (
         <I18nextProvider i18n={i18n}>
             <AuthProvider>
-                {/* <Provider store={store}> */}
+                <Provider store={store}>
                     <App />
-                {/* </Provider> */}
+                </Provider>
             </AuthProvider>
         </I18nextProvider>
     )
